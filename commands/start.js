@@ -7,16 +7,16 @@ const execSync = require('child_process').execSync;
 const { escape } = require('querystring');
 let status;
 
-function delay(n){ //非同期のdelayを定義
-    return new Promise(function(resolve){
-        setTimeout(resolve,n*1000);
+function delay(n) { //非同期のdelayを定義
+    return new Promise(function (resolve) {
+        setTimeout(resolve, n * 1000);
     });
 }
 
 let Embed = new MessageEmbed()
-.setColor('#0099ff')
-.setTitle('Server Start')
-.setDescription('サーバーを起動しています');
+    .setColor('#0099ff')
+    .setTitle('Server Start')
+    .setDescription('サーバーを起動しています');
 
 module.exports = {
     data: {
@@ -37,18 +37,18 @@ module.exports = {
     async execute(interaction) {
         if (interaction.options.getString('server') === "dev1") {
             await interaction.reply({ embeds: [Embed] });
-            block: for (;;){
+            block: for (; ;) {
                 execSync(`./start.sh ${process.env.DEV1_ID}`).toString();
                 status = execSync(`../status.sh ${process.env.DEV1_ID}`).toString();
                 addres = execSync(`../addres.sh ${process.env.DEV1_ID}`).toString();
                 console.log(status);
                 let Embed = new MessageEmbed()
-                .setColor('#0099ff')
-                .setTitle(`${interaction.options.getString('server')} start`)
-                .addField('Status', status)
-                .addField('Addres', addres)
+                    .setColor('#0099ff')
+                    .setTitle(`${interaction.options.getString('server')} start`)
+                    .addField('Status', status)
+                    .addField('Addres', addres)
                 interaction.editReply({ embeds: [Embed] });
-                if (status == "running"){
+                if (status == "running") {
                     break block;
                 }
                 await delay(1)
