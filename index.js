@@ -40,4 +40,12 @@ client.on('interactionCreate', async (interaction) => {
 	}
 });
 
+client.on('ready', () => {
+	setInterval(() => {
+		client.user.setActivity({
+			name: `${client.ws.ping}ms | AWS system`,
+		});
+	}, 10000);
+});
+
 client.login(process.env.DISCORD_TOKEN);
