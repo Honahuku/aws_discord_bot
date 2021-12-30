@@ -5,15 +5,10 @@ let address;
 
 // 非同期のdelayを定義
 function delay(n) {
-	return new Promise(function (resolve) {
+	return new Promise(function(resolve) {
 		setTimeout(resolve, n * 1000);
 	});
 }
-
-let Embed = new MessageEmbed()
-	.setColor('#0099ff')
-	.setTitle('Server Stop')
-	.setDescription('サーバーを停止しています');
 
 module.exports = {
 	data: {
@@ -32,6 +27,11 @@ module.exports = {
 		}],
 	},
 	async execute(interaction) {
+		let Embed = new MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('Server Stop')
+			.setDescription('サーバーを停止しています');
+
 		if (interaction.options.getString('server') === 'dev1') {
 			await interaction.reply({ embeds: [Embed] });
 			block: for (; ;) {
@@ -53,10 +53,40 @@ module.exports = {
 			}
 		}
 		else if (interaction.options.getString('server') === 'dev2') {
-			await interaction.reply('サーバーDev2を起動します');
+			await interaction.reply({ embeds: [Embed] });
+			block: for (; ;) {
+				execSync(`./sh/stop.sh ${process.env.DEV2_INSTANCE_ID}`).toString();
+				status = execSync(`./sh/info.sh ${process.env.DEV2_INSTANCE_ID}`).toString();
+				address = execSync(`./sh/address.sh ${process.env.DEV2_INSTANCE_ID}`).toString();
+				Embed = new MessageEmbed()
+					.setColor('#0099ff')
+					.setTitle(`/ stop server: ${interaction.options.getString('server')}`)
+					.addField('Status', status)
+					.addField('Addres', address);
+				interaction.editReply({ embeds: [Embed] });
+				if (status == Buffer.from('stopped').toString()) {
+					break block;
+				}
+				await delay(1);
+			}
 		}
 		else if (interaction.options.getString('server') === 'dev3') {
-			await interaction.reply('サーバーDev3を起動します');
+			await interaction.reply({ embeds: [Embed] });
+			block: for (; ;) {
+				execSync(`./sh/stop.sh ${process.env.DEV3_INSTANCE_ID}`).toString();
+				status = execSync(`./sh/info.sh ${process.env.DEV3_INSTANCE_ID}`).toString();
+				address = execSync(`./sh/address.sh ${process.env.DEV3_INSTANCE_ID}`).toString();
+				Embed = new MessageEmbed()
+					.setColor('#0099ff')
+					.setTitle(`/ stop server: ${interaction.options.getString('server')}`)
+					.addField('Status', status)
+					.addField('Addres', address);
+				interaction.editReply({ embeds: [Embed] });
+				if (status == Buffer.from('stopped').toString()) {
+					break block;
+				}
+				await delay(1);
+			}
 		}
 		else {
 			await interaction.reply('正しいサーバー名を入力してください');

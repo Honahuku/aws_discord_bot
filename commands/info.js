@@ -3,11 +3,6 @@ const execSync = require('child_process').execSync;
 let status;
 let address;
 
-let Embed = new MessageEmbed()
-	.setColor('#0099ff')
-	.setTitle('Server Info')
-	.setDescription('サーバーの状態を取得しています');
-
 module.exports = {
 	data: {
 		name: 'info',
@@ -25,6 +20,11 @@ module.exports = {
 		}],
 	},
 	async execute(interaction) {
+		let Embed = new MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('Server Info')
+			.setDescription('サーバーの状態を取得しています');
+
 		if (interaction.options.getString('server') === 'dev1') {
 			await interaction.reply({ embeds: [Embed] });
 			{
@@ -40,10 +40,32 @@ module.exports = {
 			}
 		}
 		else if (interaction.options.getString('server') === 'dev2') {
-			await interaction.reply('サーバーDev2を起動します');
+			await interaction.reply({ embeds: [Embed] });
+			{
+				status = execSync(`./sh/info.sh ${process.env.DEV2_INSTANCE_ID}`).toString();
+				address = execSync(`./sh/address.sh ${process.env.DEV2_INSTANCE_ID}`).toString();
+				console.log(status);
+				Embed = new MessageEmbed()
+					.setColor('#0099ff')
+					.setTitle(`/ info server: ${interaction.options.getString('server')}`)
+					.addField('Status', status)
+					.addField('Addres', address);
+				interaction.editReply({ embeds: [Embed] });
+			}
 		}
 		else if (interaction.options.getString('server') === 'dev3') {
-			await interaction.reply('サーバーDev3を起動します');
+			await interaction.reply({ embeds: [Embed] });
+			{
+				status = execSync(`./sh/info.sh ${process.env.DEV3_INSTANCE_ID}`).toString();
+				address = execSync(`./sh/address.sh ${process.env.DEV3_INSTANCE_ID}`).toString();
+				console.log(status);
+				Embed = new MessageEmbed()
+					.setColor('#0099ff')
+					.setTitle(`/ info server: ${interaction.options.getString('server')}`)
+					.addField('Status', status)
+					.addField('Addres', address);
+				interaction.editReply({ embeds: [Embed] });
+			}
 		}
 		else {
 			await interaction.reply('正しいサーバー名を入力してください');
