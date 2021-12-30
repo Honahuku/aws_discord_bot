@@ -33,9 +33,9 @@ module.exports = {
 	},
 	async execute(interaction) {
 		if (interaction.options.getString('server') === 'dev1') {
+			execSync(`./sh/start.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
 			await interaction.reply({ embeds: [Embed] });
 			block: for (; ;) {
-				execSync(`./sh/start.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
 				status = execSync(`./sh/info.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
 				address = execSync(`./sh/address.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
 				Embed = new MessageEmbed()
