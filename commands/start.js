@@ -38,10 +38,9 @@ module.exports = {
         if (interaction.options.getString('server') === "dev1") {
             await interaction.reply({ embeds: [Embed] });
             block: for (;;){
-                execSync(`aws ec2 --profile ap-northeast-1 start-instances --instance-ids ${process.env.DEV1_ID}`).toString();
-                status = execSync(`aws ec2 --profile ap-northeast-1 describe-instances --instance-id ${process.env.DEV1_ID} --query Reservations[*].Instances[*].State.Name --output text`).toString();
-                status = status.replace(/\r?\n/g,'');
-                addres = execSync(`aws ec2 --profile ap-northeast-1 describe-instances --instance-id ${process.env.DEV1_ID} --query 'Reservations[*].Instances[*].PublicIpAddress' --output text`).toString();
+                execSync(`./start.sh ${process.env.DEV1_ID}`).toString();
+                status = execSync(`../status.sh ${process.env.DEV1_ID}`).toString();
+                addres = execSync(`../addres.sh ${process.env.DEV1_ID}`).toString();
                 console.log(status);
                 let Embed = new MessageEmbed()
                 .setColor('#0099ff')
