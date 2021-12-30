@@ -1,9 +1,5 @@
-const Discord = require('discord.js');
 const { MessageEmbed } = require('discord.js');
-const { exec } = require('child_process');
-const dotenv = require('dotenv');
 const execSync = require('child_process').execSync;
-const { escape } = require('querystring');
 let status;
 let address;
 
