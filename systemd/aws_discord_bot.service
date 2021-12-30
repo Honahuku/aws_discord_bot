@@ -1,0 +1,12 @@
+[Unit]
+Description=aws_discord_bot
+After=network.target
+
+[Service]
+Type = simple
+WorkingDirectory=/var/aws_discord_bot
+ExecStart=/usr/bin/screen -DmS aws-bot%i /usr/local/bin/node /var/aws_discord_bot/index.js
+Restart = always
+
+[Install]
+WantedBy=multi-user.target
