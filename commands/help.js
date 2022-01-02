@@ -17,12 +17,14 @@ const Embed = new MessageEmbed()
 	.addField('----', 'エラーコード')
 	.addField('"インタラクションに失敗しました"と表示される', '少し待ってから再度コマンドを実行してください');
 
+// スラッシュコマンド用選択肢の定義
 module.exports = {
-
 	data: {
 		name: 'help',
 		description: 'このBotのヘルプページを表示します',
 	},
+	
+	// インタラクションの発生、処理を発火
 	async execute(interaction) {
 		await interaction.reply({ embeds: [Embed] });
 	},
