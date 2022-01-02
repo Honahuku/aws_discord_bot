@@ -48,8 +48,8 @@ module.exports = {
 
 			// 既定のembedを一度のみ送信
 			await interaction.reply({ embeds: [Embed] });
-			
-			//ec2インスタンスの停止処理、stop.shを一度のみ実行
+
+			// ec2インスタンスの停止処理、stop.shを一度のみ実行
 			execSync(`./sh/stop.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
 
 			// 処理終了まで無限ループ
@@ -60,7 +60,7 @@ module.exports = {
 
 				// address.shの結果を変数addressに格納
 				address = execSync(`./sh/address.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
-				
+
 				// 送信用embedの内容編集
 				Embed = new MessageEmbed()
 					.setColor('#0099ff')

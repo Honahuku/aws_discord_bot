@@ -23,7 +23,7 @@ module.exports = {
 		name: 'help',
 		description: 'このBotのヘルプページを表示します',
 	},
-	
+
 	// インタラクションの発生、処理を発火
 	async execute(interaction) {
 		await interaction.reply({ embeds: [Embed] });

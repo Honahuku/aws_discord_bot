@@ -35,7 +35,7 @@ module.exports = {
 			.setColor('#0099ff')
 			.setTitle('Server Info')
 			.setDescription('サーバーの状態を取得しています');
-		
+
 		// 第2引数の値に応じて分岐
 		if (interaction.options.getString('server') === 'dev1') {
 
@@ -44,11 +44,11 @@ module.exports = {
 			{
 				// info.shの結果を変数statusに格納
 				status = execSync(`./sh/info.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
-				
+
 				// address.shの結果を変数addressに格納
 				address = execSync(`./sh/address.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
 				console.log(status);
-				
+
 				// 送信用embedの内容編集
 				Embed = new MessageEmbed()
 					.setColor('#0099ff')

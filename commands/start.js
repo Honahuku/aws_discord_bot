@@ -32,7 +32,7 @@ module.exports = {
 			],
 		}],
 	},
-	
+
 	// インタラクションの発生、処理を発火
 	async execute(interaction) {
 
@@ -42,14 +42,14 @@ module.exports = {
 			.setColor('#0099ff')
 			.setTitle('Server Start')
 			.setDescription('サーバーを起動しています');
-		
+
 		// 第2引数の値に応じて分岐
 		if (interaction.options.getString('server') === 'dev1') {
 
 			// 既定のembedを一度のみ送信
 			await interaction.reply({ embeds: [Embed] });
 
-			//ec2インスタンスの起動処理、start.shを一度のみ実行
+			// ec2インスタンスの起動処理、start.shを一度のみ実行
 			execSync(`./sh/start.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
 
 			// 処理終了まで無限ループ
