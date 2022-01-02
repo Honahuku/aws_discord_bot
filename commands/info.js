@@ -28,6 +28,7 @@ module.exports = {
 
 	// インタラクションの発生、処理を発火
 	async execute(interaction) {
+
 		// embedの定義
 		// https://scrapbox.io/discordjs-japan/MessageEmbed%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF%E3%82%92%E9%80%81%E4%BF%A1%E3%81%99%E3%82%8B%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB
 		let Embed = new MessageEmbed()
@@ -44,7 +45,7 @@ module.exports = {
 				// info.shの結果を変数statusに格納
 				status = execSync(`./sh/info.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
 				
-				// address.shの結果を変数statusに格納
+				// address.shの結果を変数addressに格納
 				address = execSync(`./sh/address.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
 				console.log(status);
 				
