@@ -4,6 +4,7 @@ const execSync = require('child_process').execSync;
 let status;
 let address;
 
+// スラッシュコマンド用選択肢の定義
 module.exports = {
 	data: {
 		name: 'info',
@@ -27,13 +28,19 @@ module.exports = {
 			.setColor('#0099ff')
 			.setTitle('Server Info')
 			.setDescription('サーバーの状態を取得しています');
-
+		
+		// 第2引数の値に応じて分岐
 		if (interaction.options.getString('server') === 'dev1') {
 			await interaction.reply({ embeds: [Embed] });
 			{
+				// info.shの結果を変数statusに格納
 				status = execSync(`./sh/info.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
+				
+				// address.shの結果を変数statusに格納
 				address = execSync(`./sh/address.sh ${process.env.DEV1_INSTANCE_ID}`).toString();
 				console.log(status);
+				
+				// 送信用embedの内容編集
 				Embed = new MessageEmbed()
 					.setColor('#0099ff')
 					.setTitle(`/ info server: ${interaction.options.getString('server')}`)
@@ -42,6 +49,8 @@ module.exports = {
 				interaction.editReply({ embeds: [Embed] });
 			}
 		}
+
+		// 第2引数の値に応じて分岐、以下同様
 		else if (interaction.options.getString('server') === 'dev2') {
 			await interaction.reply({ embeds: [Embed] });
 			{
@@ -70,6 +79,8 @@ module.exports = {
 				interaction.editReply({ embeds: [Embed] });
 			}
 		}
+
+		// エラー処理
 		else {
 			await interaction.reply('正しいサーバー名を入力してください');
 		}
