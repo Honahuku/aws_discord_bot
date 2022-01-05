@@ -32,6 +32,11 @@
         "prefer-const": "error",
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
+        "semi-spacing": ["error", {"after": true, "before": false}],
+        "semi-style": ["error", "last"],
+        "no-extra-semi": "error",
+        "no-unexpected-multiline": "error",
+        "no-unreachable": "error",
         "space-before-blocks": "error",
         "space-before-function-paren": ["error", {
             "anonymous": "never",
